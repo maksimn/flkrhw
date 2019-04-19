@@ -79,20 +79,23 @@
     NetworkService *networkService = [NetworkService new];
     networkService.output = self;
     [networkService configureUrlSessionWithParams:nil];
-    
-    [networkService findFlickrPhotoWithSearchString:@"Nature"];
+    [networkService findFlickrPhotoWithSearchString:searchString];
 }
 
 #pragma mark - NetworkServiceOutputProtocol
 
 - (void)loadingContinuesWithProgress:(double)progress
 {
-    
 }
 
 - (void)loadingIsDoneWithDataRecieved:(NSData *)dataRecieved
 {
-    
+}
+
+- (void)flckrPhotoURLsReceived:(NSArray<NSString *> *)photoURLs
+{
+    NSInteger n = photoURLs.count;
+    n++;
 }
 
 @end

@@ -100,7 +100,7 @@
         // https://farm{farm-id}.staticflickr.com/{server-id}/{id}_{secret}.jpg
         
         NSArray *photos = temp[@"photos"][@"photo"];
-        NSMutableArray *resultPhotoURLs = [[NSMutableArray alloc] initWithCapacity:photos.count];
+        NSMutableArray<NSString *> *resultPhotoURLs = [[NSMutableArray alloc] initWithCapacity:photos.count];
         
         for (NSDictionary *photoData in photos)
         {
@@ -116,6 +116,7 @@
 
         dispatch_async(dispatch_get_main_queue(), ^{
             // Отсюда отправим сообщение на обновление UI с главного потока
+            [self.output flckrPhotoURLsReceived:resultPhotoURLs];
         });
     }];
     [sessionDataTask resume];
