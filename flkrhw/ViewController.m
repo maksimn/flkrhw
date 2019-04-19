@@ -8,17 +8,14 @@
 
 #import "ViewController.h"
 #import "NetworkService.h"
+#import "NetworkServiceProtocol.h"
 #import "PhotoCollectionViewCell.h"
 
 
-@interface ViewController () <UICollectionViewDataSource>
+@interface ViewController () <UICollectionViewDataSource, UISearchBarDelegate, NetworkServiceOutputProtocol>
 
 @property (nonatomic, strong) UISearchBar *searchBar;
 @property (nonatomic, strong) UICollectionView *photoCollectionView;
-
-@property (nonatomic, strong) NSArray *someUrls;
-
-@property (nonatomic, strong) NetworkService *networkService;
 
 @end
 
@@ -28,13 +25,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.someUrls = @[@"http://maksimn.github.io/musicofussr/images/1945.jpg", @"http://maksimn.github.io/musicofussr/images/20.jpg", @"http://maksimn.github.io/musicofussr/images/volga.jpg"];
-    
     self.view.backgroundColor = UIColor.yellowColor;
     
     /// Search bar:
     CGFloat screenWidth = CGRectGetWidth(self.view.bounds);
     self.searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 40, screenWidth, 44)];
+    self.searchBar.delegate = self;
     [self.view addSubview:self.searchBar];
     
     /// Photo collection view:
@@ -56,23 +52,47 @@
     self.photoCollectionView.frame = CGRectMake(0, 84, CGRectGetWidth(self.view.bounds), CGRectGetHeight(self.view.bounds) - 84);
 }
 
+#pragma mark - UICollectionViewDataSource
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return self.someUrls.count;
+    return 0;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSString *photoUrl = self.someUrls[indexPath.row];
     PhotoCollectionViewCell *cell = [self.photoCollectionView dequeueReusableCellWithReuseIdentifier:@"PhotoCollectionViewCell" forIndexPath:indexPath];
     
-    self.networkService = [NetworkService new];
-    self.networkService.output = cell;
-    [self.networkService configureUrlSessionWithParams:nil];
-    [self.networkService startImageLoading:photoUrl];
+    NetworkService *networkService = [NetworkService new];
+    networkService.output = cell;
+    [networkService configureUrlSessionWithParams:nil];
+    [networkService startImageLoading:@""];
 
     return cell;
+}
+
+#pragma mark - UISearchBarDelegate
+
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
+{
+    NSString *searchString = searchBar.text;
+    NetworkService *networkService = [NetworkService new];
+    networkService.output = self;
+    [networkService configureUrlSessionWithParams:nil];
+    
+    [networkService findFlickrPhotoWithSearchString:@"Nature"];
+}
+
+#pragma mark - NetworkServiceOutputProtocol
+
+- (void)loadingContinuesWithProgress:(double)progress
+{
+    
+}
+
+- (void)loadingIsDoneWithDataRecieved:(NSData *)dataRecieved
+{
+    
 }
 
 @end

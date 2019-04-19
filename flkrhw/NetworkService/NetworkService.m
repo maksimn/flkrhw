@@ -96,8 +96,23 @@
         NSDictionary *temp = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
         NSLog(@"temp");
         // Для получение деталей по фото
-        // https://farm{farm-id}.staticflickr.com/{server-id}/{id}_{secret}.jpg
         // example https://farm1.staticflickr.com/2/1418878_1e92283336_m.jpg
+        // https://farm{farm-id}.staticflickr.com/{server-id}/{id}_{secret}.jpg
+        
+        NSArray *photos = temp[@"photos"][@"photo"];
+        NSMutableArray *resultPhotoURLs = [[NSMutableArray alloc] initWithCapacity:photos.count];
+        
+        for (NSDictionary *photoData in photos)
+        {
+            NSString *farmId = [NSString stringWithFormat:@"%@", photoData[@"farm"]];
+            NSString *serverId = photoData[@"server"];
+            NSString *idr = photoData[@"id"];
+            NSString *secret = photoData[@"secret"];
+            
+            NSString *photoURL = [NSString stringWithFormat:@"https://farm%@.staticflickr.com/%@/%@_%@.jpg", farmId, serverId, idr, secret];
+            
+            [resultPhotoURLs addObject:photoURL];
+        }
 
         dispatch_async(dispatch_get_main_queue(), ^{
             // Отсюда отправим сообщение на обновление UI с главного потока
