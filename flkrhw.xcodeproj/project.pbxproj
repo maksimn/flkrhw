@@ -12,6 +12,9 @@
 		0C2EC52B2269DE6D0039EA79 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0C2EC52A2269DE6D0039EA79 /* Assets.xcassets */; };
 		0C2EC52E2269DE6D0039EA79 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0C2EC52C2269DE6D0039EA79 /* LaunchScreen.storyboard */; };
 		0C2EC5312269DE6D0039EA79 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C2EC5302269DE6D0039EA79 /* main.m */; };
+		0C2EC548226A1CAD0039EA79 /* NetworkHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C2EC544226A1CAD0039EA79 /* NetworkHelper.m */; };
+		0C2EC549226A1CAD0039EA79 /* NetworkService.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C2EC546226A1CAD0039EA79 /* NetworkService.m */; };
+		0C2EC54C226A1F560039EA79 /* PhotoCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C2EC54B226A1F560039EA79 /* PhotoCollectionViewCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +27,13 @@
 		0C2EC52D2269DE6D0039EA79 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0C2EC52F2269DE6D0039EA79 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0C2EC5302269DE6D0039EA79 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		0C2EC543226A1CAD0039EA79 /* NetworkService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkService.h; sourceTree = "<group>"; };
+		0C2EC544226A1CAD0039EA79 /* NetworkHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetworkHelper.m; sourceTree = "<group>"; };
+		0C2EC545226A1CAD0039EA79 /* NetworkServiceProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkServiceProtocol.h; sourceTree = "<group>"; };
+		0C2EC546226A1CAD0039EA79 /* NetworkService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetworkService.m; sourceTree = "<group>"; };
+		0C2EC547226A1CAD0039EA79 /* NetworkHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkHelper.h; sourceTree = "<group>"; };
+		0C2EC54A226A1F560039EA79 /* PhotoCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PhotoCollectionViewCell.h; sourceTree = "<group>"; };
+		0C2EC54B226A1F560039EA79 /* PhotoCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PhotoCollectionViewCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +66,7 @@
 		0C2EC5202269DE6C0039EA79 /* flkrhw */ = {
 			isa = PBXGroup;
 			children = (
+				0C2EC542226A1CAD0039EA79 /* NetworkService */,
 				0C2EC5212269DE6C0039EA79 /* AppDelegate.h */,
 				0C2EC5222269DE6C0039EA79 /* AppDelegate.m */,
 				0C2EC5242269DE6C0039EA79 /* ViewController.h */,
@@ -64,8 +75,22 @@
 				0C2EC52C2269DE6D0039EA79 /* LaunchScreen.storyboard */,
 				0C2EC52F2269DE6D0039EA79 /* Info.plist */,
 				0C2EC5302269DE6D0039EA79 /* main.m */,
+				0C2EC54A226A1F560039EA79 /* PhotoCollectionViewCell.h */,
+				0C2EC54B226A1F560039EA79 /* PhotoCollectionViewCell.m */,
 			);
 			path = flkrhw;
+			sourceTree = "<group>";
+		};
+		0C2EC542226A1CAD0039EA79 /* NetworkService */ = {
+			isa = PBXGroup;
+			children = (
+				0C2EC543226A1CAD0039EA79 /* NetworkService.h */,
+				0C2EC544226A1CAD0039EA79 /* NetworkHelper.m */,
+				0C2EC545226A1CAD0039EA79 /* NetworkServiceProtocol.h */,
+				0C2EC546226A1CAD0039EA79 /* NetworkService.m */,
+				0C2EC547226A1CAD0039EA79 /* NetworkHelper.h */,
+			);
+			path = NetworkService;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -137,9 +162,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0C2EC548226A1CAD0039EA79 /* NetworkHelper.m in Sources */,
+				0C2EC54C226A1F560039EA79 /* PhotoCollectionViewCell.m in Sources */,
 				0C2EC5262269DE6C0039EA79 /* ViewController.m in Sources */,
 				0C2EC5312269DE6D0039EA79 /* main.m in Sources */,
 				0C2EC5232269DE6C0039EA79 /* AppDelegate.m in Sources */,
+				0C2EC549226A1CAD0039EA79 /* NetworkService.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

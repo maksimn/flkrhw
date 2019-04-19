@@ -7,6 +7,8 @@
 //
 
 #import "ViewController.h"
+#import "NetworkService.h"
+#import "PhotoCollectionViewCell.h"
 
 
 @interface ViewController () <UICollectionViewDataSource>
@@ -15,6 +17,8 @@
 @property (nonatomic, strong) UICollectionView *photoCollectionView;
 
 @property (nonatomic, strong) NSArray *someUrls;
+
+@property (nonatomic, strong) NetworkService *networkService;
 
 @end
 
@@ -37,10 +41,11 @@
     UICollectionViewFlowLayout *collectionViewLayout = [UICollectionViewFlowLayout new];
     collectionViewLayout.itemSize = CGSizeMake(screenWidth / 2, screenWidth / 2);
     collectionViewLayout.minimumInteritemSpacing = 0;
+    collectionViewLayout.minimumLineSpacing = 0;
     UICollectionView *collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:collectionViewLayout];
     collectionView.backgroundColor = UIColor.lightGrayColor;
     collectionView.dataSource = self;
-    [collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"UICollectionViewCell"];
+    [collectionView registerClass:[PhotoCollectionViewCell class] forCellWithReuseIdentifier:@"PhotoCollectionViewCell"];
     self.photoCollectionView = collectionView;
     [self.view addSubview:self.photoCollectionView];
 }
@@ -60,11 +65,12 @@
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     NSString *photoUrl = self.someUrls[indexPath.row];
-    UICollectionViewCell *cell = [self.photoCollectionView dequeueReusableCellWithReuseIdentifier:@"UICollectionViewCell" forIndexPath:indexPath];
+    PhotoCollectionViewCell *cell = [self.photoCollectionView dequeueReusableCellWithReuseIdentifier:@"PhotoCollectionViewCell" forIndexPath:indexPath];
     
-    UIView *someView = [[UIView alloc] initWithFrame:cell.contentView.frame];
-    someView.backgroundColor = UIColor.blueColor;
-    [cell.contentView addSubview:someView];
+    self.networkService = [NetworkService new];
+    self.networkService.output = cell;
+    [self.networkService configureUrlSessionWithParams:nil];
+    [self.networkService startImageLoading];
 
     return cell;
 }
