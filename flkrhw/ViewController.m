@@ -86,14 +86,6 @@
 
 #pragma mark - NetworkServiceOutputProtocol
 
-- (void)loadingContinuesWithProgress:(double)progress
-{
-}
-
-- (void)loadingIsDoneWithDataRecieved:(NSData *)dataRecieved
-{
-}
-
 - (void)flckrPhotoURLsReceived:(NSArray<NSString *> *)photoURLs
 {
     self.photoURLsDataSource = photoURLs;
