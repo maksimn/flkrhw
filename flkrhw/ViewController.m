@@ -70,7 +70,7 @@
     self.networkService = [NetworkService new];
     self.networkService.output = cell;
     [self.networkService configureUrlSessionWithParams:nil];
-    [self.networkService startImageLoading];
+    [self.networkService startImageLoading:photoUrl];
 
     return cell;
 }

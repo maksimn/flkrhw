@@ -39,15 +39,14 @@
     self.urlSession = [NSURLSession sessionWithConfiguration:sessionConfiguration delegate:self delegateQueue:nil];
 }
 
-- (void)startImageLoading
+- (void)startImageLoading:(NSString *) imageURL
 {
     if (!self.urlSession)
     {
         NSURLSessionConfiguration *sessionConfiguration = [NSURLSessionConfiguration defaultSessionConfiguration];
         self.urlSession = [NSURLSession sessionWithConfiguration:sessionConfiguration delegate:self delegateQueue:nil];
     }
-    self.downloadTask = [self.urlSession downloadTaskWithURL:[NSURL URLWithString:@"https://upload.wikimedia.org/wikipedia/commons/4/4e/Pleiades_large.jpg"]];
-    /* http://is1.mzstatic.com/image/thumb/Purple2/v4/91/59/e1/9159e1b3-f67c-6c05-0324-d56f4aee156a/source/100x100bb.jpg */
+    self.downloadTask = [self.urlSession downloadTaskWithURL:[NSURL URLWithString:imageURL]];
     [self.downloadTask resume];
 }
 

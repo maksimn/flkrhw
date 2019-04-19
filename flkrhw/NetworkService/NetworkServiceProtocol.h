@@ -18,7 +18,7 @@
 @optional
 
 - (void)configureUrlSessionWithParams:(NSDictionary *)params;
-- (void)startImageLoading;
+- (void)startImageLoading:(NSString *) imageURL;
 
 // Next Step
 - (BOOL)resumeNetworkLoading;
