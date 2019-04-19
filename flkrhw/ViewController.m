@@ -61,6 +61,7 @@ typedef NS_ENUM(NSInteger, LCTTriggerType) {
     /// Push
     [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
     [self scheduleLocalNotification];
+    [self scheduleLocalNotificationDateTrigger];
 }
 
 - (void)viewDidLayoutSubviews
@@ -125,6 +126,23 @@ typedef NS_ENUM(NSInteger, LCTTriggerType) {
     }];
 }
 
+- (void)scheduleLocalNotificationDateTrigger
+{
+    UNMutableNotificationContent *content = [NotificationContent createContentToSearchDogs];
+    NSString *identifier = @"DogsNotificationId";
+    UNNotificationTrigger *anyTrigger = [self triggerWithType:LCTTriggerTypeDate];
+    
+    UNNotificationRequest *request = [UNNotificationRequest requestWithIdentifier:identifier content:content trigger:anyTrigger];
+    UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
+    [center addNotificationRequest:request withCompletionHandler:^(NSError * _Nullable error) {
+        if (error)
+        {
+            NSLog(@"Что-то пошло не так (2)...");
+        }
+    }];
+}
+
+
 - (UNTimeIntervalNotificationTrigger *)intervalTrigger
 {
     return [UNTimeIntervalNotificationTrigger triggerWithTimeInterval:10 repeats:NO];
@@ -132,7 +150,7 @@ typedef NS_ENUM(NSInteger, LCTTriggerType) {
 
 - (UNCalendarNotificationTrigger *)dateTrigger
 {
-    NSDate *date = [NSDate dateWithTimeIntervalSinceNow:3600];
+    NSDate *date = [NSDate dateWithTimeIntervalSinceNow:20];
     NSDateComponents *triggerDate = [[NSCalendar currentCalendar] components:NSCalendarUnitYear + NSCalendarUnitMonth + NSCalendarUnitDay + NSCalendarUnitHour + NSCalendarUnitMinute + NSCalendarUnitSecond fromDate:date];
     return [UNCalendarNotificationTrigger triggerWithDateMatchingComponents:triggerDate repeats:NO];
 }

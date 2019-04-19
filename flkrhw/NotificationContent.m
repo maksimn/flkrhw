@@ -13,14 +13,24 @@
 
 + (UNMutableNotificationContent *)createContentToSearchCats
 {
+    return [NotificationContent createContentToSearch:@"Вы давно не искали кошечек" img:@"cat" searchStr:@"Cats"];
+}
+
++ (UNMutableNotificationContent *)createContentToSearchDogs
+{
+    return [NotificationContent createContentToSearch:@"Вы давно не искали собачек" img:@"dog" searchStr:@"Dogs"];
+}
+
++ (UNMutableNotificationContent *)createContentToSearch:(NSString *)body img:(NSString *)img searchStr:(NSString *) searchStr
+{
     UNMutableNotificationContent *content = [UNMutableNotificationContent new];
     
     content.title = @"Оповещение";
-    content.body = @"Вы давно не искали кошечек";
+    content.body = body;
     content.sound = [UNNotificationSound defaultSound];
     content.badge = @([NotificationContent giveNewBadgeNumber] + 1);
     
-    UNNotificationAttachment *attachment = [NotificationContent imageAttachment:@"cat"];
+    UNNotificationAttachment *attachment = [NotificationContent imageAttachment:img];
     
     if (attachment)
     {
@@ -28,17 +38,13 @@
     }
     
     NSDictionary *dict = @{
-                           @"searchString": @"Cats"
+                           @"searchString": searchStr
                            };
     
     content.userInfo = dict;
     return content;
 }
 
-+ (UNMutableNotificationContent *)createContentToSearchDogs
-{
-    return nil;
-}
 
 + (UNNotificationAttachment *)imageAttachment:(NSString *) fileName
 {
