@@ -8,16 +8,24 @@
 
 #import "ViewController.h"
 
+
 @interface ViewController ()
 
+@property (nonatomic, strong) UISearchBar *searchBar;
+
 @end
+
 
 @implementation ViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
+    
+    self.view.backgroundColor = UIColor.yellowColor;
+    
+    self.searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 40, CGRectGetWidth(self.view.bounds), 44)];
+    [self.view addSubview:self.searchBar];
 }
 
-
 @end
+
