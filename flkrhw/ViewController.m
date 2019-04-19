@@ -17,6 +17,8 @@
 @property (nonatomic, strong) UISearchBar *searchBar;
 @property (nonatomic, strong) UICollectionView *photoCollectionView;
 
+@property (nonatomic, strong) NSArray<NSString *> *photoURLsDataSource;
+
 @end
 
 
@@ -56,7 +58,7 @@
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return 0;
+    return self.photoURLsDataSource.count;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
@@ -66,7 +68,7 @@
     NetworkService *networkService = [NetworkService new];
     networkService.output = cell;
     [networkService configureUrlSessionWithParams:nil];
-    [networkService startImageLoading:@""];
+    [networkService startImageLoading:self.photoURLsDataSource[indexPath.row]];
 
     return cell;
 }
@@ -94,8 +96,8 @@
 
 - (void)flckrPhotoURLsReceived:(NSArray<NSString *> *)photoURLs
 {
-    NSInteger n = photoURLs.count;
-    n++;
+    self.photoURLsDataSource = photoURLs;
+    [self.photoCollectionView reloadData];
 }
 
 @end
