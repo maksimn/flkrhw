@@ -11,5 +11,7 @@
 
 @interface ViewController : UIViewController
 
+- (void)runSearchForString:(NSString *) searchString;
+
 @end
 

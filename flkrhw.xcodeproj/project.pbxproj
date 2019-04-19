@@ -17,6 +17,7 @@
 		0C2EC54C226A1F560039EA79 /* PhotoCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C2EC54B226A1F560039EA79 /* PhotoCollectionViewCell.m */; };
 		0C2EC554226A55A70039EA79 /* cat.png in Resources */ = {isa = PBXBuildFile; fileRef = 0C2EC552226A55A60039EA79 /* cat.png */; };
 		0C2EC555226A55A70039EA79 /* dog.png in Resources */ = {isa = PBXBuildFile; fileRef = 0C2EC553226A55A60039EA79 /* dog.png */; };
+		0C2EC558226A656A0039EA79 /* NotificationContent.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C2EC557226A656A0039EA79 /* NotificationContent.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +39,8 @@
 		0C2EC54B226A1F560039EA79 /* PhotoCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PhotoCollectionViewCell.m; sourceTree = "<group>"; };
 		0C2EC552226A55A60039EA79 /* cat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cat.png; sourceTree = "<group>"; };
 		0C2EC553226A55A60039EA79 /* dog.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dog.png; sourceTree = "<group>"; };
+		0C2EC556226A656A0039EA79 /* NotificationContent.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NotificationContent.h; sourceTree = "<group>"; };
+		0C2EC557226A656A0039EA79 /* NotificationContent.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NotificationContent.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,6 +85,8 @@
 				0C2EC5302269DE6D0039EA79 /* main.m */,
 				0C2EC54A226A1F560039EA79 /* PhotoCollectionViewCell.h */,
 				0C2EC54B226A1F560039EA79 /* PhotoCollectionViewCell.m */,
+				0C2EC556226A656A0039EA79 /* NotificationContent.h */,
+				0C2EC557226A656A0039EA79 /* NotificationContent.m */,
 			);
 			path = flkrhw;
 			sourceTree = "<group>";
@@ -181,6 +186,7 @@
 				0C2EC548226A1CAD0039EA79 /* NetworkHelper.m in Sources */,
 				0C2EC54C226A1F560039EA79 /* PhotoCollectionViewCell.m in Sources */,
 				0C2EC5262269DE6C0039EA79 /* ViewController.m in Sources */,
+				0C2EC558226A656A0039EA79 /* NotificationContent.m in Sources */,
 				0C2EC5312269DE6D0039EA79 /* main.m in Sources */,
 				0C2EC5232269DE6C0039EA79 /* AppDelegate.m in Sources */,
 				0C2EC549226A1CAD0039EA79 /* NetworkService.m in Sources */,
