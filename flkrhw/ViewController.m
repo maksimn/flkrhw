@@ -10,17 +10,6 @@
 #import "NetworkService.h"
 #import "NetworkServiceProtocol.h"
 #import "PhotoCollectionViewCell.h"
-#import "NotificationContent.h"
-
-
-@import UserNotifications;
-
-
-typedef NS_ENUM(NSInteger, LCTTriggerType) {
-    LCTTriggerTypeInterval = 0,
-    LCTTriggerTypeDate = 1,
-    LCTTriggerTypeLocation = 2
-};
 
 
 @interface ViewController () <UICollectionViewDataSource, UISearchBarDelegate, NetworkServiceOutputProtocol>
@@ -57,11 +46,6 @@ typedef NS_ENUM(NSInteger, LCTTriggerType) {
     [collectionView registerClass:[PhotoCollectionViewCell class] forCellWithReuseIdentifier:@"PhotoCollectionViewCell"];
     self.photoCollectionView = collectionView;
     [self.view addSubview:self.photoCollectionView];
-    
-    /// Push
-    [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
-    [self scheduleLocalNotification];
-    [self scheduleLocalNotificationDateTrigger];
 }
 
 - (void)viewDidLayoutSubviews
@@ -106,77 +90,6 @@ typedef NS_ENUM(NSInteger, LCTTriggerType) {
 {
     self.photoURLsDataSource = photoURLs;
     [self.photoCollectionView reloadData];
-}
-
-/// Push
-
-- (void)scheduleLocalNotification
-{
-    UNMutableNotificationContent *content = [NotificationContent createContentToSearchCats];
-    NSString *identifier = @"NotificationId";
-    UNNotificationTrigger *anyTrigger = [self triggerWithType:LCTTriggerTypeInterval];
-    
-    UNNotificationRequest *request = [UNNotificationRequest requestWithIdentifier:identifier content:content trigger:anyTrigger];
-    UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
-    [center addNotificationRequest:request withCompletionHandler:^(NSError * _Nullable error) {
-        if (error)
-        {
-            NSLog(@"Что-то пошло не так...");
-        }
-    }];
-}
-
-- (void)scheduleLocalNotificationDateTrigger
-{
-    UNMutableNotificationContent *content = [NotificationContent createContentToSearchDogs];
-    NSString *identifier = @"DogsNotificationId";
-    UNNotificationTrigger *anyTrigger = [self triggerWithType:LCTTriggerTypeDate];
-    
-    UNNotificationRequest *request = [UNNotificationRequest requestWithIdentifier:identifier content:content trigger:anyTrigger];
-    UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
-    [center addNotificationRequest:request withCompletionHandler:^(NSError * _Nullable error) {
-        if (error)
-        {
-            NSLog(@"Что-то пошло не так (2)...");
-        }
-    }];
-}
-
-
-- (UNTimeIntervalNotificationTrigger *)intervalTrigger
-{
-    return [UNTimeIntervalNotificationTrigger triggerWithTimeInterval:10 repeats:NO];
-}
-
-- (UNCalendarNotificationTrigger *)dateTrigger
-{
-    NSDate *date = [NSDate dateWithTimeIntervalSinceNow:20];
-    NSDateComponents *triggerDate = [[NSCalendar currentCalendar] components:NSCalendarUnitYear + NSCalendarUnitMonth + NSCalendarUnitDay + NSCalendarUnitHour + NSCalendarUnitMinute + NSCalendarUnitSecond fromDate:date];
-    return [UNCalendarNotificationTrigger triggerWithDateMatchingComponents:triggerDate repeats:NO];
-}
-
-- (UNLocationNotificationTrigger *)locationTrigger
-{
-    return nil;
-}
-
-- (UNNotificationTrigger *)triggerWithType:(LCTTriggerType)triggerType
-{
-    switch (triggerType) {
-        case LCTTriggerTypeInterval:
-            return [self intervalTrigger];
-            
-        case LCTTriggerTypeLocation:
-            return [self locationTrigger];
-            
-        case LCTTriggerTypeDate:
-            return [self dateTrigger];
-            
-        default:
-            break;
-    }
-    
-    return nil;
 }
 
 - (void)runSearchForString:(NSString *) searchString
