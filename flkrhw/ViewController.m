@@ -12,10 +12,11 @@
 #import "PhotoCollectionViewCell.h"
 
 
-@interface ViewController () <UICollectionViewDataSource, UISearchBarDelegate, NetworkServiceOutputProtocol>
+@interface ViewController () <UICollectionViewDataSource, UICollectionViewDelegate, UISearchBarDelegate, NetworkServiceOutputProtocol>
 
 @property (nonatomic, strong) UISearchBar *searchBar;
 @property (nonatomic, strong) UICollectionView *photoCollectionView;
+@property (nonatomic, strong) PhotoWithFilterView *photoWithFilterView;
 
 @property (nonatomic, strong) NSArray<NSString *> *photoURLsDataSource;
 
@@ -43,6 +44,7 @@
     UICollectionView *collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:collectionViewLayout];
     collectionView.backgroundColor = UIColor.lightGrayColor;
     collectionView.dataSource = self;
+    collectionView.delegate = self;
     [collectionView registerClass:[PhotoCollectionViewCell class] forCellWithReuseIdentifier:@"PhotoCollectionViewCell"];
     self.photoCollectionView = collectionView;
     [self.view addSubview:self.photoCollectionView];
@@ -52,6 +54,12 @@
 {
     [super viewDidLayoutSubviews];
     self.photoCollectionView.frame = CGRectMake(0, 84, CGRectGetWidth(self.view.bounds), CGRectGetHeight(self.view.bounds) - 84);
+}
+
+- (void)runSearchForString:(NSString *) searchString
+{
+    self.searchBar.text = searchString;
+    [self searchBarSearchButtonClicked:self.searchBar];
 }
 
 #pragma mark - UICollectionViewDataSource
@@ -92,10 +100,14 @@
     [self.photoCollectionView reloadData];
 }
 
-- (void)runSearchForString:(NSString *) searchString
+#pragma mark - UICollectionViewDelegate
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    self.searchBar.text = searchString;
-    [self searchBarSearchButtonClicked:self.searchBar];
+    PhotoCollectionViewCell *cell = (PhotoCollectionViewCell *) [collectionView cellForItemAtIndexPath:indexPath];
+    UIImage *selectedImage = [cell.imageView image];
+    self.photoWithFilterView = [[PhotoWithFilterView alloc] initWithImage:selectedImage];
+    [self.view addSubview:self.photoWithFilterView];
 }
 
 @end
