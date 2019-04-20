@@ -7,10 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-
 @import UserNotifications;
 
+
 NS_ASSUME_NONNULL_BEGIN
+
 
 @interface NotificationContent : NSObject
 
@@ -18,5 +19,6 @@ NS_ASSUME_NONNULL_BEGIN
 + (UNMutableNotificationContent *)createContentToSearchDogs;
 
 @end
+
 
 NS_ASSUME_NONNULL_END
